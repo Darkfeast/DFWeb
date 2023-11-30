@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <canvas id="mycanvas" width="520px" height="1314px">
+
+    </canvas>
+
+    <script type="text/javascript">
+        //获取canvas元素
+        var myCanvas = document.getElementById('mycanvas');
+        //获取Context上下文
+        var ctx = myCanvas.getContext('2d');
+        //设置渐变色
+        // var gradient = ctx.createLinearGradient(0, 0, 70, 0)
+        // gradient.addColorStop(0, 'red');
+        // gradient.addColorStop(0.2, 'orange');
+        // gradient.addColorStop(0.5, 'yellow');
+        // gradient.addColorStop(0.7, 'green');
+        // gradient.addColorStop(1, 'blue');
+        // //填充色为渐变色
+        // ctx.fillStyle = gradient;
+        // //绘制实心矩形
+
+
+        // ctx.fillStyle = "rgba(0,0,0, 0.1)"
+        // ctx.fillRect(10, 10, 100, 200);
+
+        // ctx.fillStyle = "rgba(0,0,0, 0.1)"
+        // ctx.fillRect(10, 10, 100, 200);
+
+        let height = 500;
+
+        const fontSize = 29;
+        const rows = Math.floor(height / fontSize);
+        ctx.font = fontSize + "px 宋体";
+
+        ctx.fillStyle = "rgba(0,255,0, 0.1)"
+        ctx.fillStyle = "rgba(0,0,255, 0.1)"
+        ctx.fillRect(10, 10, 100, height); //蓝色会把上面的绿色给覆盖掉  不是叠加 ，如果给了透明度则会叠加
+        ctx.fillStyle = "rgba(0,255,0,1)";
+        ctx.fillText("ha", 50, 100); //绘制绿色字  如果上面不指定颜色，则会跟上面的蓝色0.1一致
+
+        let curRow = 2;
+
+        setInterval(() => {
+
+            // ctx.fillStyle = "rgba(0,0,0, 0.1)" //颜色rgb是0-255  a是0-1，默认是白色，每次叠加10%的(0,0,0)，255  229  206  效果是从白到灰 慢慢变黑
+            ctx.fillStyle = "rgba(0,0,0, 0.1)" //
+            ctx.fillRect(10, 10, 100, height); //矩形前面如果没有指定颜色，则默认为黑色  fillStyle后面如果没有矩形 则不会绘制颜色
+
+
+            //这里再指定一次字体颜色 然后绘制，不然会被上面的透明度影响到
+
+
+            for (let i = 0; i < 1; i++) {
+
+                ctx.fillStyle = "rgba(0,255,0,1)";
+                ctx.fillText("↓", 50, fontSize * curRow);
+
+                curRow++;
+
+                if (curRow > rows) {
+                    curRow = 2;
+                }
+            }
+
+            // ctx.fillStyle = "#00ff00";
+            // ctx.font = fontSize + "px 宋体";
+            // ctx.fillText("哈", 50, 100);
+        }, 30);
+    </script>
+</body>
+
+</html>

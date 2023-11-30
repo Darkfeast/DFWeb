@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数字雨</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="digitalRain">
+</canvas>
+    <script>
+        // 根据id获取画布
+        const cvs = document.getElementById("digitalRain");
+        // 获取屏幕的宽高
+        const width = window.screen.width;
+        const height = window.screen.height;
+
+        // 画布宽高设置来和屏幕一样大
+        cvs.width = width;
+        cvs.height = height;
+
+        // 获取画笔
+        const ctx = cvs.getContext("2d");
+
+        // 每个数字的大小
+        const fontSize = 20;
+
+        // 整个屏幕能显示多上行数字
+        const rows = Math.ceil(height / fontSize);
+        // 整个屏幕能显示多行列数字
+        const columns = Math.ceil(width / fontSize)
+
+
+        // 定义数组保存多列数字当前所处第几行，初始值在第 0 行
+        const lines = new Array(columns).fill(0);
+
+        // 定时调用里面的代码
+        setInterval(() => {
+            // 每次调用之前，都用一个不太透明的矩形遮挡整个画布
+            ctx.fillStyle = "rgba(0,0,0,0.1)"
+            ctx.fillRect(0, 0, width, height)
+
+
+            // 循环绘制多列数字
+            for (let i = 0; i < columns; i++) {
+                // 画一个字符
+                ctx.fillStyle = "#00ff00";
+                ctx.font = fontSize + "px 宋体";
+                ctx.fillText(Math.floor(Math.random() * 10) + "", i * fontSize, lines[i] * fontSize);
+                // 每次都增加当前列数字在数组中对应的行的值
+                lines[i]++;
+
+                // 如果当前数字所处的行大于最大行数，那么就把行数设置为 0 ，这样数字就返回顶部重新掉落
+                // Math.random() > 0.95 作用是让极小一部分数字在没有掉落到底部之前回到顶部
+                if (lines[i] > rows || Math.random() > 0.95) {
+                    lines[i] = 0;
+                }
+            }
+
+        }, 30)
+    </script>
+</body>
+
+</html>
