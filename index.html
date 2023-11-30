@@ -59,14 +59,28 @@
     <br />
     <br />
 
+
+
     <marquee>
         <!-- <img src="/res/css/yw.png" /> -->
-        <font style="color:#06e2ff">&nbsp&nbsp&nbsp&nbspI'm 加量兄</font>
+        <font style="color:#06e2ff">乄</font>
         <br />
-        <img src="web/res/img/accessDenied.gif" />
+        <img id="idImg" src="web/res/img/accessDenied.gif" />
         <br />
         <font style="color:#06e2ff">&nbspAccess denied</font>
     </marquee>
+
+    <script>
+
+        var objImg = document.getElementById("idImg");
+        // alert(objImg)
+        objImg.onclick= function(){
+            window.location.href='./web/page/bcPunch.html';
+        };
+
+        objImg.style.cursor= "pointer";
+
+    </script>
 
     <marquee class="df">
 
