@@ -1,16 +1,76 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<html>
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <title>digital rain</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000000;
+        }
+    </style>
+</head>
 
-    </head>
+<body>
 
-    <body>
+    <canvas id="digitalRain" style="position:absolute;z-index:-2;">
+    </canvas>
+    <script>
+        const cvs = document.getElementById("digitalRain");
+        const width = window.screen.width;
+        const height = window.screen.height;
 
-        <p>
-            欢迎来到Darkfeast!
-        </p>
+        cvs.width = width;
+        cvs.height = height;
+
+        const ctx = cvs.getContext("2d");
+
+        const fontSize = 13;
+
+        const rows = Math.ceil(height / fontSize);
+        const columns = Math.ceil(width / fontSize)
 
 
-    </body>
+        const lines = new Array(columns).fill(0);
+
+        setInterval(() => {
+            ctx.fillStyle = "rgba(0,0,0,0.1)"
+            ctx.fillRect(0, 0, width, height)
+            ctx.fillStyle = "#00ff00";
+            ctx.font = fontSize + "px 宋体";
+
+            for (let i = 0; i < columns; i++) {
+                ctx.fillText(Math.round(Math.random()), i * fontSize, lines[i] * fontSize);
+                lines[i]++;
+                if (lines[i] > rows || Math.random() > 0.95) {
+                    lines[i] = 0;
+                }
+            }
+
+        }, 30)
+    </script>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <marquee>
+        <!-- <img src="/res/css/yw.png" /> -->
+        <font style="color:#06e2ff">&nbsp&nbsp&nbsp&nbspI'm 加量兄</font>
+        <br />
+        <img src="web/res/img/accessDenied.gif" />
+        <br />
+        <font style="color:#06e2ff">&nbspAccess denied</font>
+    </marquee>
+
+    <marquee class="df">
+
+    </marquee><br>
+</body>
+
 </html>
